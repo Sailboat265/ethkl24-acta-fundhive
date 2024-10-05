@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.8.0 <0.9.0;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "./UserRegistry.sol";  // Import UserRegistry to access admin roles
@@ -8,12 +8,13 @@ contract Project {
 
     enum Category { Donation, Crowdfund }
     enum Status { Pending, Verified, Rejected }
+    enum subCategory{Art,Food,Music,Games,Design}
 
     struct ProjectDetails {
         string name;
         string overview;
         Category category;
-        string subCategory; 
+        subCategory sub; 
         uint256 fundingGoal;
         uint256 currentFunds;
         address payable creator;
@@ -30,6 +31,9 @@ contract Project {
     // UserRegistry contract instance
     UserRegistry private userRegistry;
 
+    // Array of all project creators
+    address[] private projectCreators;
+
     // Mapping of creator's wallet address to their projects
     mapping(address => mapping(uint256 => ProjectDetails)) public userProjects;
     mapping(address => uint256) public projectCount;
@@ -40,7 +44,7 @@ contract Project {
         string name,
         string overview,
         Category category,
-        string subCategory,
+        subCategory sub,
         uint256 fundingGoal
     );
 
@@ -60,7 +64,7 @@ contract Project {
         string memory _name,
         string memory _overview,
         Category _category,
-        string memory _subCategory,
+        subCategory _sub,
         uint256 _fundingGoal
     ) public {
         require(_fundingGoal > 0, "Funding goal must be greater than 0");
@@ -68,11 +72,16 @@ contract Project {
         projectCount[msg.sender]++;
         uint256 newProjectId = projectCount[msg.sender];
 
+        // If this is the user's first project, add them to the projectCreators array
+        if (projectCount[msg.sender] == 1) {
+            projectCreators.push(msg.sender);
+        }
+
         userProjects[msg.sender][newProjectId] = ProjectDetails({
             name: _name,
             overview: _overview,
             category: _category,
-            subCategory: _subCategory,
+            sub: _sub,
             fundingGoal: _fundingGoal,
             currentFunds: 0,
             creator: payable(msg.sender),
@@ -86,7 +95,7 @@ contract Project {
             _name,
             _overview,
             _category,
-            _subCategory,
+            _sub,
             _fundingGoal
         );
     }
@@ -144,8 +153,13 @@ contract Project {
         project.isActive = false;
     }
 
+    // Function for admin to view all project creators
+    function getAllProjectCreators() public view returns (address[] memory) {
+        require(userRegistry.isAdmin(msg.sender), "Caller is not an admin");
+        return projectCreators;
+    }
+
     receive() external payable {
         revert("Use the donateToProject function to donate.");
     }
 }
-
