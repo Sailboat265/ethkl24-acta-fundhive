@@ -102,6 +102,9 @@ export const Header = () => {
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
+        <Link href="/create-project" passHref className="btn btn-secondary mr-4">
+          Create Project
+        </Link>
         <RainbowKitCustomConnectButton />
         <FaucetButton />
       </div>
