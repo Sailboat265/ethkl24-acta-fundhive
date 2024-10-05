@@ -160,6 +160,6 @@ contract Project {
     }
 
     receive() external payable {
-        revert("Use the donateToProject function to donate.");
+        revert("Use the donateToProject function to donate");
     }
 }

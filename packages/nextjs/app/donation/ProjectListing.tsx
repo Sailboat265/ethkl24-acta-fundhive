@@ -1,92 +1,49 @@
+"use client";
+
 import React from "react";
+import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth"; // Adjust the path as per your project structure
+import DonationCard from "./DonationCard";
 
-// Define the project data type
-type Project = {
-  id: number;
-  name: string;
-  goal: string;
-  status: string;
-  creator: string;
-};
+const ProjectList: React.FC = () => {
+  // Fetch the event history for the "ProjectCreated" event
+  const { data: eventHistory, isLoading } = useScaffoldEventHistory({
+    contractName: "Project", // Replace with your contract name
+    eventName: "ProjectCreated", // The event you want to listen to
+    fromBlock: 6882328n, // Start fetching events from block 0
+    watch: true, // Watch for new events
+  });
 
-interface ProjectListProps {
-  projects: {
-    live: Project[];
-    fullyFunded: Project[];
-    closed: Project[];
-  };
-}
+  if (isLoading) {
+    return <div>Loading...</div>; // Display loading state if data is being fetched
+  }
 
-const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
+  if (!eventHistory || eventHistory.length === 0) {
+    return <div>No projects found.</div>; // Handle no projects scenario
+  }
+
   return (
-    <div className="flex items-center flex-col flex-grow pt-10">
-      {/* Project Categories and Search */}
-      <div className="px-5 py-6">
-        <h2 className="text-center text-xl font-bold mb-4">Crowdfunding Projects</h2>
-        <div className="flex justify-center mb-6">
-          <input
-            type="text"
-            placeholder="Search projects"
-            className="px-4 py-2 border border-gray-300 rounded-md w-1/3"
-          />
-        </div>
-        <div className="flex justify-center space-x-2 mb-8">
-          {["art", "gaming", "ic-projects", "music", "supernova", "web3", "charity", "other"].map(category => (
-            <button key={category} className="px-4 py-2 border border-gray-300 rounded-full">
-              {category}
-            </button>
-          ))}
-        </div>
+    <div>
+      <h2 className="text-3xl font-bold text-center py-8">List of Projects</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {eventHistory.map((event, index) => {
+          const projectId = event.args?.projectId ? Number(event.args.projectId) : 0;
+          const name = event.args?.name ? event.args.name.toString() : "Unnamed Project";
+          const overview = event.args?.overview ? event.args.overview.toString() : "No overview available.";
+          const fundingGoal = event.args?.fundingGoal ? event.args.fundingGoal.toString() : "0";
+          const creator = event.args?.creator ? event.args.creator.toString() : "Unknown";
+
+          return (
+            <DonationCard
+              key={index} 
+              projectId={projectId}
+              name={name}
+              overview={overview}
+              fundingGoal={fundingGoal}
+              creator={creator}
+            />
+          );
+        })}
       </div>
-
-      {/* Live Projects Section */}
-      <section id="live" className="px-5 py-6">
-        <h3 className="text-2xl font-bold mb-4">Live Projects</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.live.length > 0 ? (
-            projects.live.map(project => (
-              <div key={project.id} className="bg-gray-900 p-6 rounded-lg shadow-md">
-                <h4 className="text-xl font-semibold">{project.name}</h4>
-                <p className="mt-2">{project.goal} goal</p>
-                <p className="mt-2 text-blue-600">{project.status}</p>
-                <p className="mt-2 text-sm text-gray-500">by {project.creator}</p>
-              </div>
-            ))
-          ) : (
-            <p>No live projects in this section.</p>
-          )}
-        </div>
-      </section>
-
-      {/* Fully Funded Projects Section */}
-      <section id="funded" className="px-5 py-6">
-        <h3 className="text-2xl font-bold mb-4">Fully Funded Projects</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.fullyFunded.map(project => (
-            <div key={project.id} className="bg-gray-900 p-6 rounded-lg shadow-md">
-              <h4 className="text-xl font-semibold">{project.name}</h4>
-              <p className="mt-2">{project.goal} goal</p>
-              <p className="mt-2 text-green-600">{project.status}</p>
-              <p className="mt-2 text-sm text-gray-500">by {project.creator}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Closed Projects Section */}
-      <section id="closed" className="px-5 py-6">
-        <h3 className="text-2xl font-bold mb-4">Closed Projects</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.closed.map(project => (
-            <div key={project.id} className="bg-gray-900 p-6 rounded-lg shadow-md">
-              <h4 className="text-xl font-semibold">{project.name}</h4>
-              <p className="mt-2">{project.goal} goal</p>
-              <p className="mt-2 text-red-600">{project.status}</p>
-              <p className="mt-2 text-sm text-gray-500">by {project.creator}</p>
-            </div>
-          ))}
-        </div>
-      </section>
     </div>
   );
 };
