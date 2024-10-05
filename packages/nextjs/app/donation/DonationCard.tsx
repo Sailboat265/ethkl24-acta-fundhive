@@ -44,7 +44,7 @@ const DonationCard: React.FC<DonationCardProps> = ({ name, overview, fundingGoal
 
             {/* Push overview to start from the middle */}
             <div className="flex-grow flex items-center justify-center">
-              <p className="text-sm text-gray-400 text-center">{overview}</p>
+              <p className="text-sm text-gray-400 text-center overflow-hidden text-ellipsis w-3/4 line-clamp-3">{overview}</p>
             </div>
           </div>
 
@@ -52,7 +52,7 @@ const DonationCard: React.FC<DonationCardProps> = ({ name, overview, fundingGoal
           <div className="card-back bg-gray-800 p-4 rounded-lg shadow-md transition-all duration-300">
             {/* Name and Overview (same as front) */}
             <h4 className="text-xl font-semibold">{name}</h4>
-            <p className="mt-2 text-sm text-gray-400">{overview}</p>
+            <p className="text-sm text-gray-400 text-center overflow-hidden text-ellipsis w-3/4 line-clamp-3">{overview}</p>
 
             {/* Funding Goal */}
             <p className="mt-4">Goal: {(fundingGoal / 10 ** 18).toFixed(2)} ETH</p>
