@@ -1,7 +1,7 @@
-
 "use client";
 
 import AdminSidebar from "../components/adminsidebar";
+import UserList from "../components/userlist";
 
 export default function ManageUserPage() {
   return (
@@ -11,7 +11,7 @@ export default function ManageUserPage() {
         {" "}
         {/* Main content area */}
         <h1 className="text-3xl font-bold mb-4">Manage Users</h1>
-        <p>This section is for managing users.</p>
+        <UserList /> {/* Render the user list */}
       </div>
     </div>
   );
