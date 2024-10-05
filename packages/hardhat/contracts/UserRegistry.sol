@@ -75,4 +75,9 @@ contract UserRegistry is AccessControl {
         require(bytes(users[walletAddress].username).length > 0, "User does not exist");
         return users[walletAddress].email;
     }
+
+    function getName(address walletAddress) external view returns (string memory) {
+        require(bytes(users[walletAddress].username).length > 0, "User does not exist");
+        return users[walletAddress].username;
+    }
 }

@@ -30,3 +30,11 @@ p {
 .btn.btn-ghost {
   @apply shadow-none;
 }
+
+.projectName {
+  overflow-wrap: break-word; /* Allow word breaks for long strings */
+  overflow: hidden;          /* Hide overflow content */
+  text-overflow: ellipsis;  /* Add ellipsis for overflow */
+  white-space: normal;       /* Allow text to wrap */
+  word-break: break-all;     /* Break long words/numbers */
+}
