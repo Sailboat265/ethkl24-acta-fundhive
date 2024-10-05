@@ -38,3 +38,40 @@ p {
   white-space: normal;       /* Allow text to wrap */
   word-break: break-all;     /* Break long words/numbers */
 }
+.card-wrapper {
+  perspective: 1000px;
+  width: 100%; /* Set the width */
+  max-width: 300px; /* Optionally set a max-width for the card */
+  height: 400px; /* Set a height that fits the content */
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card-wrapper:hover .card {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  z-index: 2; /* Ensure the front is initially on top */
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  z-index: 1; /* The back is initially hidden */
+}

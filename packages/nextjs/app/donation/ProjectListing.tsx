@@ -9,7 +9,7 @@ const ProjectList: React.FC = () => {
   const { data: eventHistory, isLoading } = useScaffoldEventHistory({
     contractName: "Project", // Replace with your contract name
     eventName: "ProjectCreated", // The event you want to listen to
-    fromBlock: 6882328n, // Start fetching events from block 0
+    fromBlock: 6884539n, // Start fetching events from block 0
     watch: true, // Watch for new events
   });
 
@@ -24,7 +24,7 @@ const ProjectList: React.FC = () => {
   return (
     <div>
       <h2 className="text-3xl font-bold text-center py-8">List of Projects</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {eventHistory.map((event, index) => {
           const projectId = event.args?.projectId ? Number(event.args.projectId) : 0;
           const name = event.args?.name ? event.args.name.toString() : "Unnamed Project";
@@ -33,14 +33,14 @@ const ProjectList: React.FC = () => {
           const creator = event.args?.creator ? event.args.creator.toString() : "Unknown";
 
           return (
-            <DonationCard
-              key={index} 
-              projectId={projectId}
-              name={name}
-              overview={overview}
-              fundingGoal={fundingGoal}
-              creator={creator}
-            />
+              <DonationCard
+                  key={index}
+                  projectId={projectId}
+                  name={name}
+                  overview={overview}
+                  fundingGoal={fundingGoal}
+                  creator={creator}
+              />
           );
         })}
       </div>
