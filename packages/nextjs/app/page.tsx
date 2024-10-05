@@ -7,20 +7,6 @@ import ProjectList from "./donation/ProjectListing";
 import type { NextPage } from "next";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-const projects = {
-  live: [{ id: 1, name: "motoDEX", goal: "10000 ICP", status: "Live Now", creator: "Oleksii Vynogradov" }],
-  fullyFunded: [
-    { id: 2, name: "DRat", goal: "300 ICP", status: "Fully Funded", creator: "DRat Team" },
-    { id: 3, name: "ToyoWorld", goal: "5000 ICP", status: "Fully Funded", creator: "ToyoWorld Team" },
-    { id: 4, name: "Cubetopia", goal: "3000 ICP", status: "Fully Funded", creator: "Cubetopia Team" },
-    { id: 5, name: "Cosmicrafts", goal: "3000 ICP", status: "Fully Funded", creator: "Omar Hernandez Salmeron" },
-  ],
-  closed: [
-    { id: 6, name: "Project Closed 1", goal: "2500 ICP", status: "Closed", creator: "Closed Team 1" },
-    { id: 7, name: "Project Closed 2", goal: "1000 ICP", status: "Closed", creator: "Closed Team 2" },
-  ],
-};
-
 const Home: NextPage = () => {
   return (
     <>
@@ -51,7 +37,7 @@ const Home: NextPage = () => {
 
         <div className="container mx-auto" id="project">
           <h1 className="text-4xl font-bold text-center py-8">Crowdfunding Projects</h1>
-          <ProjectList projects={projects} />
+          <ProjectList />
         </div>
 
         {/* Debug and Explorer Sections */}

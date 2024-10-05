@@ -1,56 +1,80 @@
 import React from "react";
-import Image from "next/image";
+import { Address } from "~~/components/scaffold-eth";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth"; 
+import { parseEther } from "viem";
 
-interface Campaign {
+// Define the props for the DonationCard
+interface DonationCardProps {
   name: string;
   overview: string;
-  category: string;
-  subCategory: string;
-  fundingGoal: number;
-  currentFunds: number;
-  imageUrl: string;
+  fundingGoal: string;
+  currentFunds: string;
+  creator: string;
+  projectId: number;
 }
 
-interface DonationCardProps {
-  campaign: Campaign;
-}
+const DonationCard: React.FC<DonationCardProps> = ({
+  name,
+  overview,
+  fundingGoal,
+  currentFunds,
+  creator,
+  projectId,
+}) => {
+  // Calculate the percentage progress
+  const progress = (parseFloat(currentFunds) / parseFloat(fundingGoal)) * 100;
 
-const DonationCard: React.FC<DonationCardProps> = ({ campaign }) => {
-  const { name, overview, category, fundingGoal, currentFunds, imageUrl } = campaign;
+  // Scaffold-ETH write contract hook for donations
+  const { writeContractAsync: writeAsync } = useScaffoldWriteContract("Project");
 
-  // Calculate funding progress
-  const progress = Math.min((currentFunds / fundingGoal) * 100, 100);
+  // Donate handler
+  const handleDonate = async () => {
+    try {
+      // Call the donateToProject function with projectId and value (e.g., 0.1 ETH)
+      writeAsync({
+        functionName: "donateToProject",
+        args: [creator, projectId],
+        value: parseEther("0.1"), // Goal in ETH (not transferred, just stored)
+      });
+      alert("Donation successful!");
+    } catch (e) {
+      console.error("Error donating:", e);
+      alert("Failed to donate.");
+    }
+  };
 
   return (
-    <div className="relative bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105">
-      {/* Image */}
-      <div className="relative">
-        <Image src={imageUrl} alt={name} width={500} height={300} className="w-full h-40 object-cover" />
+    <div className="bg-gray-900 p-6 rounded-lg shadow-md transition-all duration-300 hover:scale-105">
+      {/* Project Name */}
+      <h4 className="text-2xl font-semibold">{name}</h4>
+
+      {/* Overview */}
+      <p className="mt-2 text-sm text-gray-400 truncate">{overview}</p>
+
+      {/* Funding Goal */}
+      <p className="mt-2">Goal: {fundingGoal} ETH</p>
+
+      {/* Current Funds */}
+      <p className="mt-2">Raised: {currentFunds} ETH</p>
+
+      {/* Progress Bar */}
+      <div className="mt-4">
+        <div className="relative w-full h-4 bg-gray-700 rounded">
+          <div className="absolute top-0 left-0 h-full bg-green-500 rounded" style={{ width: `${progress}%` }} />
+        </div>
+        <p className="mt-1 text-sm text-gray-400">{progress.toFixed(2)}% of goal</p>
       </div>
 
-      {/* Card Content */}
-      <div className="p-4">
-        {/* Title and Category */}
-        <div className="mb-2">
-          <h2 className="text-lg font-bold leading-tight text-gray-900 truncate">{name}</h2>
-          <p className="text-xs text-gray-600">{category}</p>
-        </div>
-
-        {/* Short Overview */}
-        <p className="text-sm text-gray-700 line-clamp-2">{overview}</p>
-
-        {/* Progress and Funding Info */}
-        <div className="mt-4">
-          {/* Progress Bar */}
-          <div className="relative h-2 bg-gray-200 rounded">
-            <div className="absolute top-0 left-0 h-full bg-green-500 rounded" style={{ width: `${progress}%` }} />
-          </div>
-          <div className="flex justify-between mt-2 text-xs text-gray-600">
-            <span>{progress.toFixed(2)}% Funded</span>
-            <span>{(fundingGoal - currentFunds).toFixed(2)} ETH Needed</span>
-          </div>
-        </div>
+      {/* Creator's Avatar and Address */}
+      <div className="mt-4">
+        <p className="text-sm text-gray-500">Creator:</p>
+        <Address address={creator} />
       </div>
+
+      {/* Donate Button */}
+      <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700" onClick={handleDonate}>
+        Donate 0.1 ETH
+      </button>
     </div>
   );
 };

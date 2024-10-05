@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     Project: {
-      address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+      address: "0x51Bb5928dDbE14344FB71e5db06974390CEC2Fba",
       abi: [
         {
           inputs: [
@@ -86,9 +86,9 @@ const deployedContracts = {
             },
             {
               indexed: false,
-              internalType: "string",
-              name: "subCategory",
-              type: "string",
+              internalType: "enum Project.subCategory",
+              name: "sub",
+              type: "uint8",
             },
             {
               indexed: false,
@@ -160,9 +160,9 @@ const deployedContracts = {
               type: "uint8",
             },
             {
-              internalType: "string",
-              name: "_subCategory",
-              type: "string",
+              internalType: "enum Project.subCategory",
+              name: "_sub",
+              type: "uint8",
             },
             {
               internalType: "uint256",
@@ -209,6 +209,19 @@ const deployedContracts = {
           name: "donateToProject",
           outputs: [],
           stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllProjectCreators",
+          outputs: [
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -297,9 +310,9 @@ const deployedContracts = {
               type: "uint8",
             },
             {
-              internalType: "string",
-              name: "subCategory",
-              type: "string",
+              internalType: "enum Project.subCategory",
+              name: "sub",
+              type: "uint8",
             },
             {
               internalType: "uint256",
@@ -338,7 +351,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     UserRegistry: {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      address: "0x17F24D3b8Bc1150553b54Da30B4d993AcB889212",
       abi: [
         {
           inputs: [],
@@ -715,7 +728,7 @@ const deployedContracts = {
   },
   534351: {
     Project: {
-      address: "0x59a667a6430CBcED19023a97c0A6faC758259Bfc",
+      address: "0x8352b777E148e67Eddd6b172085e9D16FB19E488",
       abi: [
         {
           inputs: [
@@ -794,9 +807,9 @@ const deployedContracts = {
             },
             {
               indexed: false,
-              internalType: "string",
-              name: "subCategory",
-              type: "string",
+              internalType: "enum Project.subCategory",
+              name: "sub",
+              type: "uint8",
             },
             {
               indexed: false,
@@ -868,9 +881,9 @@ const deployedContracts = {
               type: "uint8",
             },
             {
-              internalType: "string",
-              name: "_subCategory",
-              type: "string",
+              internalType: "enum Project.subCategory",
+              name: "_sub",
+              type: "uint8",
             },
             {
               internalType: "uint256",
@@ -917,6 +930,19 @@ const deployedContracts = {
           name: "donateToProject",
           outputs: [],
           stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllProjectCreators",
+          outputs: [
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -1005,9 +1031,9 @@ const deployedContracts = {
               type: "uint8",
             },
             {
-              internalType: "string",
-              name: "subCategory",
-              type: "string",
+              internalType: "enum Project.subCategory",
+              name: "sub",
+              type: "uint8",
             },
             {
               internalType: "uint256",
