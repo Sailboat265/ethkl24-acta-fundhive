@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth"; // Adjust the path as per your project structure
+import DonationCard from "./DonationCard";
 
 const ProjectList: React.FC = () => {
   // Fetch the event history for the "ProjectCreated" event
@@ -25,16 +26,21 @@ const ProjectList: React.FC = () => {
       <h2 className="text-3xl font-bold text-center py-8">List of Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {eventHistory.map((event, index) => {
-          const { projectId, name, overview, fundingGoal, creator } = event.args;
+          const projectId = event.args?.projectId ? Number(event.args.projectId) : 0;
+          const name = event.args?.name ? event.args.name.toString() : "Unnamed Project";
+          const overview = event.args?.overview ? event.args.overview.toString() : "No overview available.";
+          const fundingGoal = event.args?.fundingGoal ? event.args.fundingGoal.toString() : "0";
+          const creator = event.args?.creator ? event.args.creator.toString() : "Unknown";
 
           return (
-            <div key={index} className="bg-gray-900 p-6 rounded-lg shadow-md">
-              <h4 className="text-2xl font-semibold">{name}</h4>
-              <p className="mt-2">Overview: {overview}</p>
-              <p className="mt-2">Goal: {fundingGoal} ETH</p>
-              <p className="mt-2">Created by: {creator}</p>
-              <p className="mt-2">Project ID: {projectId}</p>
-            </div>
+            <DonationCard
+              key={index} 
+              projectId={projectId}
+              name={name}
+              overview={overview}
+              fundingGoal={fundingGoal}
+              creator={creator}
+            />
           );
         })}
       </div>

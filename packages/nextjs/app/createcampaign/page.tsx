@@ -12,7 +12,7 @@ const CreateCampaign: NextPage = () => {
     overview: "",
     category: "Donation", // Default category
     subCategory: "",
-    fundingGoal: "", // In ETH, converted to Wei
+    fundingGoal: "Null", // In ETH, converted to Wei
   });
 
   const { name, overview, category, subCategory, fundingGoal } = formData;
@@ -43,7 +43,7 @@ const CreateCampaign: NextPage = () => {
           name, // Campaign name
           overview, // Campaign overview
           category === "Donation" ? 0 : 1, // Category: 0 for Donation, 1 for Crowdfunding
-          subCategory, // Sub-category
+          subCategory === "Null" ? 0 : 1, // This is a Error Logic
           parseEther(fundingGoal), // Goal in ETH (not transferred, just stored)
         ],
       });

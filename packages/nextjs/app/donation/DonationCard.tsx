@@ -1,28 +1,20 @@
 import React from "react";
 import { Address } from "~~/components/scaffold-eth";
-import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth"; 
 import { parseEther } from "viem";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth"; 
 
 // Define the props for the DonationCard
 interface DonationCardProps {
   name: string;
   overview: string;
   fundingGoal: string;
-  currentFunds: string;
   creator: string;
-  projectId: number;
+  projectId: number | bigint;
 }
 
-const DonationCard: React.FC<DonationCardProps> = ({
-  name,
-  overview,
-  fundingGoal,
-  currentFunds,
-  creator,
-  projectId,
-}) => {
+const DonationCard: React.FC<DonationCardProps> = ({ name, overview, fundingGoal, creator, projectId }) => {
   // Calculate the percentage progress
-  const progress = (parseFloat(currentFunds) / parseFloat(fundingGoal)) * 100;
+  const progress = (0 / parseFloat(fundingGoal)) * 100;
 
   // Scaffold-ETH write contract hook for donations
   const { writeContractAsync: writeAsync } = useScaffoldWriteContract("Project");
@@ -30,16 +22,15 @@ const DonationCard: React.FC<DonationCardProps> = ({
   // Donate handler
   const handleDonate = async () => {
     try {
+        const projectIdBigInt = BigInt(projectId);
       // Call the donateToProject function with projectId and value (e.g., 0.1 ETH)
       writeAsync({
         functionName: "donateToProject",
-        args: [creator, projectId],
+        args: [creator, projectIdBigInt],
         value: parseEther("0.1"), // Goal in ETH (not transferred, just stored)
       });
-      alert("Donation successful!");
     } catch (e) {
       console.error("Error donating:", e);
-      alert("Failed to donate.");
     }
   };
 
@@ -52,10 +43,7 @@ const DonationCard: React.FC<DonationCardProps> = ({
       <p className="mt-2 text-sm text-gray-400 truncate">{overview}</p>
 
       {/* Funding Goal */}
-      <p className="mt-2">Goal: {fundingGoal} ETH</p>
-
-      {/* Current Funds */}
-      <p className="mt-2">Raised: {currentFunds} ETH</p>
+      <p className="mt-2">Goal: {(fundingGoal / 10 ** 18).toFixed(2)} ETH</p>
 
       {/* Progress Bar */}
       <div className="mt-4">
