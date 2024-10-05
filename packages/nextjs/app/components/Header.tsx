@@ -8,17 +8,17 @@ const Header: React.FC = () => {
       <nav>
         <ul className="flex space-x-4 items-center">
           <li>
-            <Link href="#project" passHref>
+            <Link href="#home" passHref>
               <a className="link">Home</a>{" "}
             </Link>
           </li>
           <li>
-            <Link href="" passHref className="link">
+            <Link href="#project" passHref className="link">
               Projects
             </Link>{" "}
           </li>
           <li>
-            <Link href="" passHref className="link">
+            <Link href="/createcampaign" passHref className="link">
               <button className="bg-blue-500 text-white px-4 py-2 rounded">Start a Crowdfund</button>
             </Link>
           </li>

@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import PageIllustration from "./page-illustration";
+import { Address } from "~~/components/scaffold-eth";
+import { useAccount } from "wagmi";
 import Avatar01 from "/public/images/avatar-01.png";
 import Avatar02 from "/public/images/avatar-02.png";
 import Avatar03 from "/public/images/avatar-03.png";
 import Avatar04 from "/public/images/avatar-04.png";
 
 export default function HeroHome() {
+  const { address: connectedAddress } = useAccount();
   return (
     <section className="relative">
       <PageIllustration />
@@ -65,16 +68,20 @@ export default function HeroHome() {
               </p>
               <div className="relative before:absolute before:inset-0 before:border-y before:[border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1]">
                 <div
-                  className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center"
+                  className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center pt-2 pb-1 "
                   data-aos="zoom-y-out"
                   data-aos-delay={450}
                 >
+                  <div className="flex justify-center items-center space-x-2 flex-col sm:flex-row  items-center px-5">
+                    <p className="font-medium">Connected Address:</p>
+                    <Address address={connectedAddress} />
+                  </div>
                   <a
-                    className="btn group mb-4 w-full bg-gradient-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-[bottom] text-white shadow hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto"
+                    className="btn group w-full bg-gradient-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-[bottom] text-white shadow hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto"
                     href="#0"
                   >
                     <span className="relative inline-flex items-center">
-                      <Link href="#project" passHref>
+                      <Link href="/donation" passHref className="link">
                         Explore Project
                       </Link>
                       <span className="ml-1 tracking-normal text-blue-300 transition-transform group-hover:translate-x-0.5">
