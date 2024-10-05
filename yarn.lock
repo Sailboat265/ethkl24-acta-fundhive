@@ -2088,6 +2088,7 @@ __metadata:
     autoprefixer: ^10.4.20
     blo: ^1.0.1
     burner-connector: ^0.0.8
+    clsx: ^2.1.1
     daisyui: 4.12.10
     eslint: ^8.15.0
     eslint-config-next: ^14.0.4
@@ -4984,7 +4985,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.1.1":
+"clsx@npm:2.1.1, clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: acd3e1ab9d8a433ecb3cc2f6a05ab95fe50b4a3cfc5ba47abb6cbf3754585fcb87b84e90c822a1f256c4198e3b41c7f6c391577ffc8678ad587fc0976b24fd57
@@ -8817,11 +8818,11 @@ __metadata:
   linkType: hard
 
 "jiti@npm:^2.1.2":
-  version: 2.2.1
-  resolution: "jiti@npm:2.2.1"
+  version: 2.1.2
+  resolution: "jiti@npm:2.1.2"
   bin:
     jiti: lib/jiti-cli.mjs
-  checksum: 40881ee25cb4e71686ba4d4553eef9452a3b2f06ca4308ddab15a1af1c7086023ef260c1f9ec7aa5fc306f66b1b27663060cab444aac20d5a582e0e068a1037a
+  checksum: cf40b2051093395e2c3ec8b0f0c4fe931cbf91654533fe170437901aec441663cdd6deade281cb4b029222fc4c939751fa9dd022d46d99b1d62023d1cf182736
   languageName: node
   linkType: hard
 
