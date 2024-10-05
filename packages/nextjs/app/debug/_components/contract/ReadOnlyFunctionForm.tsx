@@ -37,7 +37,7 @@ export const ReadOnlyFunctionForm = ({
     address: contractAddress,
     functionName: abiFunction.name,
     abi: abi,
-    args: getParsedContractFunctionArgs(form),
+    args: getParsedContractFunctionArgs(form).map(arg => (typeof arg === "bigint" ? arg.toString() : arg)),
     chainId: targetNetwork.id,
     query: {
       enabled: false,

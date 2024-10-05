@@ -71,8 +71,9 @@ const getParsedContractFunctionArgs = (form: Record<string, any>) => {
   return Object.keys(form).map(key => {
     const valueOfArg = form[key];
 
-    // Attempt to deeply parse JSON strings
-    return deepParseValues(valueOfArg);
+    // Deep parse values and convert BigInt to string
+    const parsedValue = deepParseValues(valueOfArg);
+    return typeof parsedValue === "bigint" ? parsedValue.toString() : parsedValue;
   });
 };
 
