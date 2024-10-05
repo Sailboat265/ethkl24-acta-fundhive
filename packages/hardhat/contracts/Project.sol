@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity >=0.8.0 <0.9.0;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
-import "./User.sol";  // Import UserRegistry to access admin roles
+import "./UserRegistry.sol";  // Import UserRegistry to access admin roles
 
 contract Project {
 
