@@ -12,6 +12,7 @@ import {
   ChevronDownIcon,
   DocumentDuplicateIcon,
   QrCodeIcon,
+  UserIcon, // <-- Import UserIcon here
 } from "@heroicons/react/24/outline";
 import { BlockieAvatar, isENS } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
@@ -121,6 +122,13 @@ export const AddressInfoDropdown = ({
               </button>
             </li>
           ) : null}
+          {/* Profile option with UserIcon */}
+          <li className={selectingNetwork ? "hidden" : ""}>
+            <a href="/Profile" className="menu-item btn-sm !rounded-xl flex gap-3 py-3">
+              <UserIcon className="h-6 w-4 ml-2 sm:ml-0" /> {/* <-- Add UserIcon here */}
+              <span>View Profile</span>
+            </a>
+          </li>
           <li className={selectingNetwork ? "hidden" : ""}>
             <button
               className="menu-item text-error btn-sm !rounded-xl flex gap-3 py-3"
