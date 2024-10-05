@@ -1,0 +1,79 @@
+/* HeroSection.css */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-content {
+    text-align: left;
+    max-width: 800px;
+    padding: 20px;
+  }
+  
+  .hero-title {
+    font-size: 4rem;
+    line-height: 1;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .stickers {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .sticker {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 8px;
+    display: inline-block;
+  }
+  
+  .sticker.green {
+    background-color: #80cc7a; /* Green */
+  }
+  
+  .sticker.purple {
+    background-color: #9061c2; /* Purple */
+    position: relative;
+  }
+  
+  .sticker.purple::before {
+    content: "Hello, I am";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: #f2c5f9;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: #000;
+  }
+  
+  .hero-description {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .hero-button {
+    display: inline-block;
+    margin-top: 30px;
+    background-color: #ff6150; /* Red */
+    color: white;
+    padding: 15px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .hero-button:hover {
+    background-color: #ff3a28;
+  }
+  

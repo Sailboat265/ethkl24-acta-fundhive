@@ -1,6 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Header from "./components/Header";
+import HeroSection from "./components/HeroSection";
+import ProjectList from "./donation/ProjectListing";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
@@ -8,37 +11,59 @@ import { Address } from "~~/components/scaffold-eth";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
+  const projects = {
+    live: [{ id: 1, name: "motoDEX", goal: "10000 ICP", status: "Live Now", creator: "Oleksii Vynogradov" }],
+    fullyFunded: [
+      { id: 2, name: "DRat", goal: "300 ICP", status: "Fully Funded", creator: "DRat Team" },
+      { id: 3, name: "ToyoWorld", goal: "5000 ICP", status: "Fully Funded", creator: "ToyoWorld Team" },
+      { id: 4, name: "Cubetopia", goal: "3000 ICP", status: "Fully Funded", creator: "Cubetopia Team" },
+      { id: 5, name: "Cosmicrafts", goal: "3000 ICP", status: "Fully Funded", creator: "Omar Hernandez Salmeron" },
+    ],
+    closed: [
+      { id: 6, name: "Project Closed 1", goal: "2500 ICP", status: "Closed", creator: "Closed Team 1" },
+      { id: 7, name: "Project Closed 2", goal: "1000 ICP", status: "Closed", creator: "Closed Team 2" },
+    ],
+  };
 
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
-          </h1>
-          <div className="flex justify-center items-center space-x-2 flex-col sm:flex-row">
-            <p className="my-2 font-medium">Connected Address:</p>
-            <Address address={connectedAddress} />
-          </div>
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/page.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
+      <div className="flex items-center flex-col flex-grow pt-0 rounded-3xl shadow-lg">
+        <Header />
+
+        {/* Hero Section */}
+        <HeroSection />
+
+        {/* Display Connected Address */}
+        <div className="flex justify-center items-center space-x-2 flex-col sm:flex-row mt-12">
+          <p className="font-medium">Connected Address:</p>
+          <Address address={connectedAddress} />
         </div>
 
+        {/* Featured Projects Section */}
+        <section id="projects" className="py-12 px-5">
+          <h3 className="text-3xl font-bold text-center mb-8">Featured Projects</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-gray-900 p-6 rounded-lg shadow-md">
+              <h4 className="text-2xl font-semibold">ICPoker</h4>
+              <p className="mt-2">Raising in ICP</p>
+            </div>
+            <div className="bg-gray-900 p-6 rounded-lg shadow-md">
+              <h4 className="text-2xl font-semibold">MotoDEX</h4>
+              <p className="mt-2">Raising 10000 ICP</p>
+            </div>
+            <div className="bg-gray-900 p-6 rounded-lg shadow-md">
+              <h4 className="text-2xl font-semibold">Bridge23</h4>
+              <p className="mt-2">Your Data is Your Business</p>
+            </div>
+          </div>
+        </section>
+
+        <div className="container mx-auto" id="project">
+          <h1 className="text-4xl font-bold text-center py-8">Crowdfunding Projects</h1>
+          <ProjectList projects={projects} />
+        </div>
+
+        {/* Debug and Explorer Sections */}
         <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
           <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
             <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
@@ -63,6 +88,10 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
+
+        <footer className="w-full py-6 text-center bg-gray-900 mt-10">
+          <p>&copy; 2024 Crowdfunding Platform. Powered by Web3.</p>
+        </footer>
       </div>
     </>
   );
