@@ -25,3 +25,4 @@ dist
 # contracts specific
 packages/hardhat/deployments/*
 package-lock.json
+packages/nextjs/contracts/deployedContracts.ts
