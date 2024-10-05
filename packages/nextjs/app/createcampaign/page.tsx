@@ -5,14 +5,24 @@ import { NextPage } from "next";
 import { parseEther } from "viem";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
+// Define the available subcategories based on the enum from the smart contract
+const subCategoryOptions = [
+  { label: "Art", value: 0 },
+  { label: "Food", value: 1 },
+  { label: "Music", value: 2 },
+  { label: "Games", value: 3 },
+  { label: "Design", value: 4 },
+  { label: "Null", value: 5 },
+];
+
 const CreateCampaign: NextPage = () => {
   // Form data state
   const [formData, setFormData] = useState({
     name: "",
     overview: "",
     category: "Donation", // Default category
-    subCategory: "",
-    fundingGoal: "Null", // In ETH, converted to Wei
+    subCategory: "0", // Default to Art (index 0 in the enum)
+    fundingGoal: "", // In ETH, converted to Wei
   });
 
   const { name, overview, category, subCategory, fundingGoal } = formData;
@@ -43,8 +53,8 @@ const CreateCampaign: NextPage = () => {
           name, // Campaign name
           overview, // Campaign overview
           category === "Donation" ? 0 : 1, // Category: 0 for Donation, 1 for Crowdfunding
-          subCategory === "Null" ? 0 : 1, // This is a Error Logic
-          parseEther(fundingGoal), // Goal in ETH (not transferred, just stored)
+          parseInt(subCategory), // Sub-category as an integer based on the enum index
+          parseEther(fundingGoal), // Goal in ETH (converted to Wei)
         ],
       });
       alert("Campaign created successfully!");
@@ -54,7 +64,7 @@ const CreateCampaign: NextPage = () => {
         name: "",
         overview: "",
         category: "Donation",
-        subCategory: "",
+        subCategory: "0", // Reset to the default category
         fundingGoal: "",
       });
     } catch (e) {
@@ -115,14 +125,18 @@ const CreateCampaign: NextPage = () => {
         {/* Sub-Category */}
         <div className="mb-6">
           <label className="block text-lg font-semibold text-gray-700 mb-2">Sub-Category</label>
-          <input
-            type="text"
+          <select
             name="subCategory"
             value={subCategory}
             onChange={handleInputChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="e.g., Education, Health"
-          />
+          >
+            {subCategoryOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Funding Goal */}
