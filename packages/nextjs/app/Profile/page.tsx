@@ -63,10 +63,13 @@ const UserProfilePage: React.FC = () => {
 
   useEffect(() => {
     // Check if all necessary data has been fetched
-    if (userEmail && userName && address && userProjects) {
+    if (userEmail && userName && address) {
+      // Default userProjects to an empty array if it doesn't exist
+      const projectsData = userProjects ? userProjects : [];
+
       // Map over the readonly projects and convert to mutable array + bigint to number conversion
       const mappedProjects: Project[] = (
-        userProjects as readonly { projectId: bigint; name: string; status: number }[]
+        projectsData as readonly { projectId: bigint; name: string; status: number }[] // Handle case when projects are undefined
       ).map(project => ({
         projectId: Number(project.projectId), // Convert bigint to number
         name: project.name,
@@ -77,7 +80,7 @@ const UserProfilePage: React.FC = () => {
         userName: userName as string,
         email: userEmail as string,
         walletAddress: address,
-        projects: mappedProjects, // Set the converted projects
+        projects: mappedProjects, // Set the converted projects or empty array
       };
       setUserProfile(profileData);
     }
@@ -105,7 +108,7 @@ const UserProfilePage: React.FC = () => {
 
       {/* Projects Section */}
       <div style={{ marginBottom: "20px" }}>
-        <h3>User Projects</h3>
+        <p><strong>User Projects</strong></p>
         {userProfile.projects.length > 0 ? (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "20px" }}>
             {userProfile.projects.map(project => (
@@ -124,14 +127,13 @@ const UserProfilePage: React.FC = () => {
             ))}
           </div>
         ) : (
-          <p>No projects found.</p>
+          <p style={{ marginBottom: "30px" }}>No projects found.</p>
         )}
       </div>
 
-
       {/* Funding Section */}
-      <div>
-        <h3>User Past Fundings</h3>
+      <div style={{ marginBottom: "30px" }}>
+        <p><strong>User Past Fundings</strong></p>
         <p>
           To view transaction history of the user, please navigate to the Block Explorer.
         </p>
