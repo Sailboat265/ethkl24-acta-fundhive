@@ -1,8 +1,8 @@
 "use client";
 
-import AdminSidebar from "../components/adminsidebar";
-import UserList from "../components/userlist";
 import RequireAdmin from "../components/RequireAdmin";
+import AdminSidebar from "../components/adminsidebar";
+import ProjectList from "../components/projectlist";
 
 export default function ManageUserPage() {
   return (
@@ -12,8 +12,8 @@ export default function ManageUserPage() {
         <div className="flex-grow p-6">
           {" "}
           {/* Main content area */}
-          <h1 className="text-3xl font-bold mb-4">Manage Users</h1>
-          <UserList /> {/* Render the user list */}
+          <h1 className="text-3xl font-bold mb-4">Manage Projects</h1>
+          <ProjectList /> {/* Render the user list */}
         </div>
       </div>
     </RequireAdmin>

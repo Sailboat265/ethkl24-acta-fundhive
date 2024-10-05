@@ -25,10 +25,10 @@ const AdminSidebar = () => {
           </Link>
         </li>
         <li className="mb-2">
-          <Link href="/admin/manage_campaign">
+          <Link href="/admin/manage_project">
             <div
               className={`w-full p-4 rounded-lg transition flex items-center 
-              ${currentPath === "/admin/manage_campaign" ? "bg-blue-600" : "bg-gray-700 hover:bg-blue-500"}`}
+              ${currentPath === "/admin/manage_project" ? "bg-blue-600" : "bg-gray-700 hover:bg-blue-500"}`}
             >
               <DocumentTextIcon className="h-6 w-6 mr-2" /> {/* Campaign Icon */}
               <span className="text-lg">Projects</span> {/* Increased font size */}
