@@ -8,7 +8,7 @@ contract Project {
 
     enum Category { Donation, Crowdfund }
     enum Status { Pending, Verified, Rejected }
-    enum subCategory{Art,Food,Music,Games,Design}
+    enum subCategory{Art,Food,Music,Games,Design,Null}
 
     struct ProjectDetails {
         string name;

@@ -6,8 +6,8 @@ import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 type FormData = {
   projectName: string;
   projectOverview: string;
-  category: string; // Keep as string for form input, will map to enum later
-  subCategory: string; // Added subCategory to match contract
+  category: string; // Category input (Donation, Crowdfund)
+  subCategory: string; // Subcategory input (Art, Food, etc.)
   pricePool: number;
 };
 
@@ -18,25 +18,49 @@ export default function CreateProject() {
     projectName: "",
     projectOverview: "",
     category: "",
-    subCategory: "", // Initialize subCategory
+    subCategory: "",
     pricePool: 0,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-
     setFormData({
       ...formData,
-      [name]: name === "pricePool" ? Number(value) : value, // Ensure pricePool is a number
+      [name]: name === "pricePool" ? Number(value) : value,
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+
+    let subCategoryEnum = 5; // Set to Null by default (corresponds to "Null" in your enum)
 
     // Mapping category string to enum
-    const categoryEnum = formData.category === "Donation" ? 0 : 1; // 0 for Donation, 1 for Crowdfund
+    const categoryEnum = formData.category === "Donation" ? 0 : 1;
+
+    // If the category is Crowdfund, map the subCategory accordingly
+    if (categoryEnum === 1) {
+      switch (formData.subCategory.toLowerCase()) {
+        case "art":
+          subCategoryEnum = 0;
+          break;
+        case "food":
+          subCategoryEnum = 1;
+          break;
+        case "music":
+          subCategoryEnum = 2;
+          break;
+        case "games":
+          subCategoryEnum = 3;
+          break;
+        case "design":
+          subCategoryEnum = 4;
+          break;
+        default:
+          alert("Please select a valid sub-category for Crowdfund.");
+          return;
+      }
+    }
 
     try {
       await writeYourContractAsync({
@@ -44,9 +68,9 @@ export default function CreateProject() {
         args: [
           formData.projectName,
           formData.projectOverview,
-          categoryEnum, // Passing enum value to contract
-          formData.subCategory, // Dynamic subCategory
-          BigInt(formData.pricePool), // Pass pricePool as BigInt
+          categoryEnum,
+          subCategoryEnum, // This will be "Null" for Donation, or the correct value for Crowdfund
+          BigInt(formData.pricePool),
         ],
       });
     } catch (e) {
@@ -101,17 +125,25 @@ export default function CreateProject() {
         </div>
 
         {/* SubCategory */}
-        <div>
-          <label className="block text-sm font-medium">SubCategory</label>
-          <input
-            type="text"
-            name="subCategory"
-            value={formData.subCategory}
-            onChange={handleChange}
-            className="mt-1 p-2 border rounded w-full"
-            placeholder="Enter SubCategory"
-          />
-        </div>
+        {formData.category === "Crowdfund" && (
+          <div>
+            <label className="block text-sm font-medium">SubCategory</label>
+            <select
+              name="subCategory"
+              value={formData.subCategory}
+              onChange={handleChange}
+              className="mt-1 p-2 border rounded w-full"
+              required
+            >
+              <option value="">Select SubCategory</option>
+              <option value="Art">Art</option>
+              <option value="Food">Food</option>
+              <option value="Music">Music</option>
+              <option value="Games">Games</option>
+              <option value="Design">Design</option>
+            </select>
+          </div>
+        )}
 
         {/* Price Pool */}
         <div>
