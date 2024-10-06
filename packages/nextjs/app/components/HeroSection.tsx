@@ -13,7 +13,7 @@ export default function HeroHome() {
   return (
     <section className="relative">
       <PageIllustration />
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 bg-base-100">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 bg-black">
         {/* Hero content */}
         <div className="pb-12  md:pb-20 p-10">
           {/* Section header */}
@@ -58,8 +58,8 @@ export default function HeroHome() {
               data-aos="zoom-y-out"
               data-aos-delay={150}
             >
-              A Crowdfunding & Donation Platform <br className="max-lg:hidden" />
-              Be the blessing that others need.
+              A Crowdfunding Platform <br className="max-lg:hidden" />
+              to Launch Your Web3 Project
             </h1>
             <div className="mx-auto max-w-3xl">
               <p className="mb-8 text-lg text-gray-100">

@@ -23,9 +23,9 @@ const ProjectList: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="bg-black mb-15">
       <h2 className="text-3xl font-bold text-center py-8">List of Projects</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {eventHistory.map((event, index) => {
           const projectId = event.args?.projectId ? Number(event.args.projectId) : 0;
           const name = event.args?.name ? event.args.name.toString() : "Unnamed Project";
