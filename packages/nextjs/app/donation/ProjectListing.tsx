@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth"; // Adjust the path as per your project structure
+// Adjust the path as per your project structure
 import DonationCard from "./DonationCard";
+import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth";
 
 const ProjectList: React.FC = () => {
   // Fetch the event history for the "ProjectCreated" event
@@ -31,16 +32,20 @@ const ProjectList: React.FC = () => {
           const overview = event.args?.overview ? event.args.overview.toString() : "No overview available.";
           const fundingGoal = event.args?.fundingGoal ? event.args.fundingGoal.toString() : "0";
           const creator = event.args?.creator ? event.args.creator.toString() : "Unknown";
+          const category = event.args?.category ? Number(event.args.category) : 0; // Pass category as number
+          const status = event.args?.status ? Number(event.args.status) : 0; // Pass status as number
 
           return (
-              <DonationCard
-                  key={index}
-                  projectId={projectId}
-                  name={name}
-                  overview={overview}
-                  fundingGoal={fundingGoal}
-                  creator={creator}
-              />
+            <DonationCard
+              key={index}
+              projectId={projectId}
+              name={name}
+              overview={overview}
+              fundingGoal={fundingGoal}
+              creator={creator}
+              category={category} // Pass category
+              status={status} // Pass status
+            />
           );
         })}
       </div>
