@@ -7,9 +7,9 @@ export default function PageIllustration() {
   return (
     <>
       {/* Stripes illustration */}
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 -translate-x-1/2 transform" aria-hidden="true">
+      {/* <div className="pointer-events-none absolute left-1/2 top-0 -z-10 -translate-x-1/2 transform" aria-hidden="true">
         <Image className="max-w-none" src={Stripes} width={768} height={200} alt="Stripes" priority />
-      </div>
+      </div> */}
 
       {/* First Circle */}
       <div

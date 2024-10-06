@@ -10,7 +10,7 @@ import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 const Home: NextPage = () => {
   return (
     <>
-      <div className="flex items-center flex-col flex-grow pt-0 rounded-3xl shadow-lg">
+      <div className="flex items-center flex-col flex-grow pt-0 rounded-3xl shadow-lg bg-black">
         <Header />
 
         {/* Hero Section */}
