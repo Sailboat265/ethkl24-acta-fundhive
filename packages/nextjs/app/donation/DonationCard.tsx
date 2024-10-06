@@ -64,7 +64,7 @@
       };
 
       return (
-          <div className="card-wrapper">
+          <div className="card-wrapper mx-auto mt-4 max-w-lg">
               <div className="card">
                   {/* Front side of the card */}
                   <div
