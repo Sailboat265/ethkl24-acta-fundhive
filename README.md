@@ -1,5 +1,7 @@
 ### Verified UserRegistry Smart Contract
-https://sepolia.scrollscan.com/address/0x22307fDb8eD8C662895CE34d41C9e71ea36E0913#code
+Deployed At Address: 0xCc4928AD848A0A0d00de5fccf24bA8f6c17AFE79
+https://sepolia.scrollscan.com/address/0xCc4928AD848A0A0d00de5fccf24bA8f6c17AFE79#code
 
 ### Verified Project Smart Contract
-https://sepolia.scrollscan.com/address/0x9c4D3310811146DBE6bb11019aBA1CA01F9fb9b4#code
+Deployed At Address: 0x7763eCBBf26156BA045Ec0b2e9aAEF9735058394
+https://sepolia.scrollscan.com/address/0x7763eCBBf26156BA045Ec0b2e9aAEF9735058394#code
