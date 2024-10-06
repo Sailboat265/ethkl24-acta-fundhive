@@ -4,7 +4,7 @@ import Link from "next/link";
 const Header: React.FC = () => {
   return (
     <header className="w-full px-5 flex justify-between items-center py-4 shadow-md">
-      <h1 className="text-2xl font-bold">FundHive</h1>
+      <h1 className="text-2xl font-bold text-[#FFC220]">FundHive</h1>
       <nav>
         <ul className="flex space-x-4 items-center">
           <li>

@@ -7,12 +7,16 @@ import Avatar01 from "/public/images/avatar-01.png";
 import Avatar02 from "/public/images/avatar-02.png";
 import Avatar03 from "/public/images/avatar-03.png";
 import Avatar04 from "/public/images/avatar-04.png";
+import FundHiveLogo from "/public/images/FundHive.png";
 
 export default function HeroHome() {
   const { address: connectedAddress } = useAccount();
   return (
     <section className="relative">
       <PageIllustration />
+      <div style={{position: "absolute", top: "0rem", left: "-8rem"}}>
+        <Image src={FundHiveLogo} alt="FundHive Logo" width={220} height={220} />
+      </div>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 bg-black">
         {/* Hero content */}
         <div className="pb-12  md:pb-20 p-10">
