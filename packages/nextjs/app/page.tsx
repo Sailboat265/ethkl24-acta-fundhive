@@ -67,7 +67,7 @@ const Home: NextPage = () => {
         </div>
 
         <footer className="w-full py-6 text-center bg-gray-900 mt-10">
-          <p>&copy; 2024 Crowdfunding Platform. Powered by Web3.</p>
+          <p>&copy; Crowdfunding & Donation Platform. Powered by Web3.</p>
         </footer>
       </div>
     </>

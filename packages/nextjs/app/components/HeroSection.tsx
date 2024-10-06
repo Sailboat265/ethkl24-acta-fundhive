@@ -58,8 +58,8 @@ export default function HeroHome() {
               data-aos="zoom-y-out"
               data-aos-delay={150}
             >
-              A Crowdfunding Platform <br className="max-lg:hidden" />
-              to Launch Your Web3 Project
+              A Crowdfunding & Donation Platform <br className="max-lg:hidden" />
+              Be the blessing that others need.
             </h1>
             <div className="mx-auto max-w-3xl">
               <p className="mb-8 text-lg text-gray-100">
